@@ -5,12 +5,9 @@
  * Date: 19-4-24
  * Time: 下午5:26
  */
-
 define('APP_PATH',__dir__.'/');
 define('APP_DEBUG',true);
-
-require(APP_PATH.'fashphp/Fashphp.php');
-
+require(APP_PATH.'fastphp/Fastphp.php');
 $config = require(APP_PATH.'config/config.php');
 
-(new fashphp\Fashphp($config))->run();
+(new fastphp\Fastphp($config))->run();

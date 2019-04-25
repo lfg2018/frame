@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Fashphp.iml" filepath="$PROJECT_DIR$/.idea/Fashphp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Fastphp/.idea/Fashphp.iml" filepath="$PROJECT_DIR$/../Fastphp/.idea/Fashphp.iml" />
     </modules>
   </component>
 </project>
