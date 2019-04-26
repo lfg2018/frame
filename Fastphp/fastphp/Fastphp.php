@@ -51,21 +51,24 @@ class Fastphp{
         $actionName = $this->config['defaultAction'];
         $param = [];
         $url = $_SERVER['REQUEST_URI'];
-        $position = strpos($url,'?');
+        $position = strpos($url,'?'); // 清除?之后的内容
         $url = $position === false ? $url : substr($url,'0',$position);
 
         $position = strpos($url,'index.php');
         if($position !== false){
             $url = substr($url,$position+strlen('index.php'));
         }
-        $url = trim($url,'/');
+        $url = trim($url,'/');  // 删除前后的“/”
 
         if($url){
-            $urlArray = explode('/',$url);
+            $urlArray = explode('/',$url);     // 使用“/”分割字符串，并保存在数组中
+            // 获取控制器名
             $urlArray = array_filter($urlArray);
             $controllerName = ucfirst($urlArray[0]);
+            // 获取动作名
             array_shift($urlArray);
             $actionName = $urlArray?$urlArray[0]:$actionName;
+            // 获取URL参数
             array_shift($urlArray);
             $param = $urlArray?$urlArray:[];
         }
@@ -78,8 +81,14 @@ class Fastphp{
             exit($actionName.'方法不存在');
         }
 
-        var_dump($param);
-        var_dump($urlArray);exit;
+        // 如果控制器和操作名存在，则实例化控制器，因为控制器对象里面
+        // 还会用到控制器名和操作名，所以实例化的时候把他们俩的名称也
+        // 传进去。结合Controller基类一起看
+        $dispatch = new $controller($controllerName,$actionName);
+        // $dispatch保存控制器实例化后的对象，我们就可以调用它的方法，
+        // 也可以像方法中传入参数，以下等同于：$dispatch->$actionName($param)
+        call_user_func_array(array($dispatch,$actionName),$param);
+
     }
 
     //检查开发环境

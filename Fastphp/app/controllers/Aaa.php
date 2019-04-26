@@ -9,5 +9,7 @@
 namespace app\controllers;
 
 class Aaa{
-    public function bbb(){}
+    public function bbb(){
+        echo(__FUNCTION__);
+    }
 }
